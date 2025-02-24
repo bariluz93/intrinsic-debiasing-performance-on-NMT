@@ -28,7 +28,7 @@ Translation models:
   Opus-MT and Mbart50:
   [easynmt bariluz github](https://github.com/bariluz93/EasyNMT)
   ```
-  https://github.com/bariluz93/EasyNMT.git
+  git clone https://github.com/bariluz93/EasyNMT.git
   ```
 Debiasing methods:
   Hard-Debias:
@@ -39,7 +39,7 @@ Debiasing methods:
   INLP:
   [NullSpace Projection bariluz github](https://github.com/bariluz93/nullspace_projection)
   ```
-  https://github.com/bariluz93/nullspace_projection.git
+  git clone https://github.com/bariluz93/nullspace_projection.git
   ```
   LEACE:
   Install concept erasure
