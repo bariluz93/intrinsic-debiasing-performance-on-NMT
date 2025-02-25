@@ -4,8 +4,9 @@ import torch
 import os
 from sacrebleu.metrics import BLEU
 bleu = BLEU()
-os.environ['TRANSFORMERS_CACHE'] = '/cs/snapless/gabis/bareluz'
-from consts import get_basic_configurations, LANGUAGE_STR_MAP, Language,LANGUAGE_CODES_MAP
+from consts import get_basic_configurations, LANGUAGE_STR_MAP, Language,LANGUAGE_CODES_MAP, TRANSFORMERS_CACHE
+os.environ['TRANSFORMERS_CACHE'] = TRANSFORMERS_CACHE
+
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
 def translate(input_file:str, output_file:str, config:str):

@@ -1,8 +1,8 @@
 import os
-os.environ['TRANSFORMERS_CACHE'] = '/cs/snapless/gabis/bareluz'
 import json
 
-from consts import Language, param_dict, DATA_HOME, ENGLISH_VOCAB,LANGUAGE_STR_TO_INT_MAP, get_debias_files_from_config, get_evaluate_gender_files
+from consts import Language, param_dict, DATA_HOME, ENGLISH_VOCAB,LANGUAGE_STR_TO_INT_MAP, get_debias_files_from_config, get_evaluate_gender_files, TRANSFORMERS_CACHE
+os.environ['TRANSFORMERS_CACHE'] = TRANSFORMERS_CACHE
 from transformers import MarianTokenizer
 import re
 tokenizer_de = MarianTokenizer.from_pretrained("Helsinki-NLP/opus-mt-en-de")

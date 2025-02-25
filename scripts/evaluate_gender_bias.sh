@@ -99,7 +99,6 @@ fi
 
 #################### translate anti sentences to test gender bias ####################
 input_path=${snapless_data_dir}/anti_data/${language_dir}/anti.unesc.tok.tc.bpe.en
-#echo "input_path: ${input_path}"
 model_type=bpe256
 model_name=model.npz
 model_dir=${snapless_data_dir}/models/${language_dir}/${model_type}/${model_name}
@@ -128,10 +127,6 @@ if [ $translate = true ]; then
 fi
 
 
-#echo "#################### merge translations ####################"
-#python ${nematus_dir}/merge_translations.py \
-#     -c "{'USE_DEBIASED': 0, 'LANGUAGE': ${language_num}, 'COLLECT_EMBEDDING_TABLE': 0, 'DEBIAS_METHOD': ${debias_method}}" \
-#     -e 0
 echo "#################### prepare gender data ####################"
 python ${debias_files_dir}/src/prepare_gender_data.py  -c "${config_non_debiased}"
 
@@ -143,7 +138,6 @@ exec 2>&1
 cd ${mt_gender_dir}
 #source venv/bin/activate
 cd src
-export FAST_ALIGN_BASE=/cs/usr/bareluz/gabi_labs/nematus_clean/nematus/fast_align
 ./../scripts/evaluate_language.sh ../data/aggregates/en_anti.txt ${language} ${model_str} ${debias_method} ${debias_loc}
 #sh ../scripts/evaluate_debiased.sh ${language} ${debias_method} ${model_str}
 

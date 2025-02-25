@@ -1,5 +1,5 @@
 print_embedding_table:
-    - runs translate on arbitrary dataset to print the embedding table (relevant only for nemtus model)
+    - runs translate on arbitrary dataset to print the embedding table
 evaluate_gender_bias:
     - runs preprocess on the anti sentences
     - translate anti sentences with the debiased embedding table
@@ -7,8 +7,8 @@ evaluate_gender_bias:
     - run merge_translations.py
       to keep only the line numbers that are common to the debiased and non debiased translations.
       the resulted sentences are saved to:
-      translations using debiased embedding table: ANTI_TRANSLATED_DEBIASED_MERGED
-      translations using non debiased embedding table: ANTI_TRANSLATED_NON_DEBIASED_MERGED
+      translatoins using debiased embedding table: ANTI_TRANSLATED_DEBIASED_MERGED
+      translatoins using non debiased embedding table: ANTI_TRANSLATED_NON_DEBIASED_MERGED
       source sentences: EN_ANTI_MERGED
     - run prepare_gender_data.py to prepare the sentences in the format of <sentence> ||| <translation>
       for the evaluation in mt_gender.
@@ -22,8 +22,8 @@ evaluate_translation:
     - run merge_translations.py
       to keep only the line numbers that are common to the debiased and non debiased translations.
       the resulted sentences are saved to:
-      translations using debiased embedding table: TRANSLATED_DEBIASED_MERGED
-      translations using non debiased embedding table: TRANSLATED_NON_DEBIASED_MERGED
+      translatoins using debiased embedding table: TRANSLATED_DEBIASED_MERGED
+      translatoins using non debiased embedding table: TRANSLATED_NON_DEBIASED_MERGED
       gold translations: BLEU_GOLD_DATA_FILTERED
     - run evaluate_translation.py to evaluate the translations
       save the results to

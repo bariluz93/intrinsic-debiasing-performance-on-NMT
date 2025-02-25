@@ -3,9 +3,8 @@ from os import listdir
 from os.path import isfile, join
 import shutil
 import argparse
-from consts import TranslationModels
+from consts import TranslationModels, PROJECT_HOME
 from datetime import datetime
-HOME = "/cs/usr/bareluz/gabi_labs/nematus_clean/"
 LOCATIONS = ['A','B','C']
 
 def cleanup(paths,files_to_ignore):
@@ -47,11 +46,11 @@ if __name__ == '__main__':
                                           "non_debiased_"+str(debias_method)+"_"+model+"_"+location+".out.tmp"]
 
 
-        cleanup([HOME + "debias_outputs/en-" + language + "/debias",
-                 HOME + "debias_outputs/en-" + language +"/output", ],
+        cleanup([PROJECT_HOME + "debias_outputs/en-" + language + "/debias",
+                 PROJECT_HOME + "debias_outputs/en-" + language +"/output", ],
                 files_to_ignore)
-    cleanup([HOME + "mt_gender/translations/NEMATUS",
-             HOME + "mt_gender/translations/EASY_NMT",
-             HOME + "mt_gender/data/aggregates"],
+    cleanup([PROJECT_HOME + "mt_gender/translations/NEMATUS",
+             PROJECT_HOME + "mt_gender/translations/EASY_NMT",
+             PROJECT_HOME + "mt_gender/data/aggregates"],
             ["en_anti.txt", "en_pro.txt", "en.txt"])
 

@@ -92,6 +92,7 @@ if [ $end_decoder_debias = 1 ]; then
     debias_loc="${debias_loc}_C"
 fi
 
+
 #################### translate anti sentences to test gender bias ####################
 input_path=${snapless_data_dir}/anti_data/anti.en
 outputh_path_debiased=${debias_outputs_dir}/${language_dir}/output/debiased_anti_${debias_method}_${model_str}${debias_loc}.out.tmp
@@ -128,7 +129,7 @@ exec 2>&1
 cd ${mt_gender_dir}
 #source venv/bin/activate
 cd src
-export FAST_ALIGN_BASE=/cs/usr/bareluz/gabi_labs/nematus_clean/nematus/fast_align
+#export FAST_ALIGN_BASE=/cs/usr/bareluz/gabi_labs/nematus_clean/nematus/fast_align
 echo "./../scripts/evaluate_language.sh ../data/aggregates/en_anti.txt ${language} ${model_str} ${debias_method} ${debias_loc}"
 ./../scripts/evaluate_language.sh ../data/aggregates/en_anti.txt ${language} ${model_str} ${debias_method} ${debias_loc}
 

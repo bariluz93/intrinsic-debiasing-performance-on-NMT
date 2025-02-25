@@ -1,6 +1,6 @@
 import os
-os.environ['TRANSFORMERS_CACHE'] = '/cs/snapless/gabis/bareluz'
-from consts import Language, param_dict,DATA_HOME, MT_GENDER_HOME
+from consts import Language, param_dict,DATA_HOME, MT_GENDER_HOME, TRANSFORMERS_CACHE
+os.environ['TRANSFORMERS_CACHE'] = TRANSFORMERS_CACHE
 
 from transformers import MarianTokenizer
 

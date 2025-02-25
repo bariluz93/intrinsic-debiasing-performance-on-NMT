@@ -69,7 +69,7 @@ do
 Mandatory arguments:
   -l, --language                  the destination translation language. RUSSIAN = 0, GERMAN = 1,HEBREW = 2,SPANISH = 3 .
   -d, --debias_method             the debias method. HARD_DEBIAS = 0, INLP = 1 .
-  -m, --model                     the translation model. Nematus=0, EasyNMT=1 .
+  -m, --model                     the translation model. Nematus=0, EasyNMT=1, Mbart50=2 .
 Optional arguments:
   -c, --collect_embedding_table   collect embedding table .
   -p, --preprocess                preprocess the anti dataset .
@@ -100,8 +100,8 @@ if [ "$model" == "" ]; then
   exit 1
 fi
 case $model in
-    0|1) echo ;;
-    *) echo "argument model can get only the values 0 for Nematus or 1 to easyNMT"
+    0|1|2) echo ;;
+    *) echo "argument model can get only the values 0 for Nematus or 1 to easyNMT or 2 to Mbart50"
        exit 1;;
 esac
 #if words_to_debias is not given, ONE_TOKEN_PROFESSIONS = 1 is selected
@@ -117,7 +117,7 @@ case $words_to_debias in
 esac
 
 
-if [ "$model" == '1' ]; then
+if [[ "$model" == '1' || "$model" == '2' ]]; then
   if [[ "$collect_embedding_table" == "-c" || "$preprocess" == "-p" ]]; then
     echo cannot pass --collect_embedding_table and --preprocess with easyNMT
     exit 1
@@ -133,14 +133,20 @@ if [ $collect_embedding_table = true ]; then
   sh print_embedding_table.sh ${language} ${debias_method}
 fi
 
-if [ "$model" == "0" ]; then
-  echo "running nematus flows"
-  sh ${debias_files_dir}/scripts/evaluate_gender_bias.sh -l ${language} -d ${debias_method} ${preprocess} ${translate} ${debias_encoder} ${beginning_decoder_debias} ${end_decoder_debias} -w ${words_to_debias}
-  sh ${debias_files_dir}/scripts/evaluate_translation.sh -l ${language} -d ${debias_method} ${translate} ${debias_encoder} ${beginning_decoder_debias} ${end_decoder_debias} -w ${words_to_debias}
-else
-    echo "running easyNMT flows"
-  sh ${debias_files_dir}/scripts/evaluate_gender_bias_easynmt.sh -l ${language} -d ${debias_method} ${preprocess} ${translate} ${debias_encoder} ${beginning_decoder_debias} ${end_decoder_debias} -w ${words_to_debias}
-  echo "sh evaluate_translation_easynmt.sh -l ${language} -d ${debias_method} ${translate} ${debias_encoder} ${beginning_decoder_debias} ${end_decoder_debias} -w ${words_to_debias}"
-  sh ${debias_files_dir}/scripts/evaluate_translation_easynmt.sh -l ${language} -d ${debias_method} ${translate} ${debias_encoder} ${beginning_decoder_debias} ${end_decoder_debias} -w ${words_to_debias}
-fi
+sh ${debias_files_dir}/scripts/evaluate_gender_bias_general.sh -l ${language} -d ${debias_method} ${preprocess} ${translate} ${debias_encoder} ${beginning_decoder_debias} ${end_decoder_debias} -w ${words_to_debias} -m ${model}
+sh ${debias_files_dir}/scripts/evaluate_translation_general.sh -l ${language} -d ${debias_method} ${translate} ${debias_encoder} ${beginning_decoder_debias} ${end_decoder_debias} -w ${words_to_debias} -m ${model}
+
+#if [ "$model" == "0" ]; then
+#  echo "running nematus flows"
+#  sh ${debias_files_dir}/scripts/evaluate_gender_bias.sh -l ${language} -d ${debias_method} ${preprocess} ${translate} ${debias_encoder} ${beginning_decoder_debias} ${end_decoder_debias} -w ${words_to_debias}
+#  sh ${debias_files_dir}/scripts/evaluate_translation.sh -l ${language} -d ${debias_method} ${translate} ${debias_encoder} ${beginning_decoder_debias} ${end_decoder_debias} -w ${words_to_debias}
+#elif [ "$model" == "1" ]; then
+#    echo "running easyNMT flows"
+#  sh ${debias_files_dir}/scripts/evaluate_gender_bias_easynmt.sh -l ${language} -d ${debias_method} ${preprocess} ${translate} ${debias_encoder} ${beginning_decoder_debias} ${end_decoder_debias} -w ${words_to_debias}
+#  sh ${debias_files_dir}/scripts/evaluate_translation_easynmt.sh -l ${language} -d ${debias_method} ${translate} ${debias_encoder} ${beginning_decoder_debias} ${end_decoder_debias} -w ${words_to_debias}
+#else
+#    echo "running Mbart50 flows"
+#    sh ${debias_files_dir}/scripts/evaluate_gender_bias_easynmt.sh -l ${language} -d ${debias_method} ${preprocess} ${translate} ${debias_encoder} ${beginning_decoder_debias} ${end_decoder_debias} -w ${words_to_debias}
+#    sh ${debias_files_dir}/scripts/evaluate_translation_easynmt.sh -l ${language} -d ${debias_method} ${translate} ${debias_encoder} ${beginning_decoder_debias} ${end_decoder_debias} -w ${words_to_debias}
+#fi
 
