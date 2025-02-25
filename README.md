@@ -11,4 +11,44 @@ This repo contains code and data for reproducing the experiments in [The Impact 
   year={2024}
 }
 ```
+## Requirements:
+Requirements file:
+```
+pip install -r requirements.txt
+```
+
+The code uses several translation models and debiasing methods.
+For the chosen configuration to work you need to clone the following repositories forks:
+Translation models:
+  Nematus:
+  [nematus bariluz github](https://github.com/bariluz93/nematus/tree/switch_to_easy_nmt)
+  ```
+  git clone https://github.com/bariluz93/nematus.git
+  ```
+  Opus-MT and Mbart50:
+  [easynmt bariluz github](https://github.com/bariluz93/EasyNMT)
+  ```
+  git clone https://github.com/bariluz93/EasyNMT.git
+  ```
+Debiasing methods:
+  Hard-Debias:
+  [Hard-Debias bariluz github](https://github.com/bariluz93/debiaswe)
+  ```
+  git clone https://github.com/bariluz93/debiaswe.git
+  ```
+  INLP:
+  [NullSpace Projection bariluz github](https://github.com/bariluz93/nullspace_projection)
+  ```
+  git clone https://github.com/bariluz93/nullspace_projection.git
+  ```
+  LEACE:
+  Install concept erasure
+  ```
+  pip install concept-erasure
+  ```
+
+  
+  
+
+
 The code will be updated soon
