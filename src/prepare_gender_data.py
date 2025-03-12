@@ -3,7 +3,7 @@ import pickle
 import sys
 # sys.path.append("..") # Adds higher directory to python modules path.
 sys.path.append("../../debias_files") # Adds higher directory to python modules path.
-
+import os
 from consts import get_evaluate_gender_files, LANGUAGE_STR_MAP, parse_config, Language
 import argparse
 from detokenize import detokenize_matrix
@@ -21,6 +21,7 @@ def prepare_gender_sents_translation_to_evaluation(source_filename,source_transl
     print(source_filename)
     print("source_translated_filename")
     print(source_translated_filename)
+    os.makedirs(os.path.dirname(dest_filename), exist_ok=True)
     with open(source_filename, "r") as s1,open(source_translated_filename, "r") as s2, open(dest_filename, "w") as d:
         lines_source = s1.readlines()
         # lines_translated = detokenize_matrix(s2.readlines(), LANGUAGE_STR_MAP[Language(language)])

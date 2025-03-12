@@ -4,7 +4,7 @@ from consts import get_basic_configurations, LANGUAGE_STR_MAP, Language
 model = EasyNMT('opus-mt')
 
 def translate(input_file:str, output_file:str, config:str):
-    USE_DEBIASED, LANGUAGE, _, DEBIAS_METHOD, _ ,DEBIAS_ENCODER,BEGINNING_DECODER_DEBIAS,END_DECODER_DEBIAS,WORDS_TO_DEBIAS= get_basic_configurations(config)
+    USE_DEBIASED, LANGUAGE, _, DEBIAS_METHOD, TRANSLATION_MODEL ,DEBIAS_ENCODER,BEGINNING_DECODER_DEBIAS,END_DECODER_DEBIAS,WORDS_TO_DEBIAS= get_basic_configurations(config)
     with open(input_file, 'r') as input, open(output_file, 'w') as output:
         translations = model.translate(input.readlines(), source_lang='en',
                                        target_lang=LANGUAGE_STR_MAP[Language(LANGUAGE)],
@@ -14,7 +14,8 @@ def translate(input_file:str, output_file:str, config:str):
                                        debias_encoder=DEBIAS_ENCODER,
                                        beginning_decoder_debias=BEGINNING_DECODER_DEBIAS,
                                        end_decoder_debias=END_DECODER_DEBIAS,
-                                       words_to_debias=WORDS_TO_DEBIAS)
+                                       words_to_debias=WORDS_TO_DEBIAS,
+                                       translation_model=TRANSLATION_MODEL)
         output.writelines(translations)
 
 if __name__ == '__main__':

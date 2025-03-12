@@ -22,33 +22,24 @@ class Language(Enum):
     HEBREW = 2
     SPANISH = 3
 
-
-TranslationModels = ["NEMATUS", "EASY_NMT"]
-
-
+TranslationModels =["NEMATUS","EASY_NMT","MBART50"]
 class TranslationModelsEnum(Enum):
     NEMATUS = 0
     EASY_NMT = 1
-
-
-LANGUAGE_STR_TO_INT_MAP = {'ru': 0, 'de': 1, 'he': 2, 'es': 3}
+    MBART50 = 2
+LANGUAGE_STR_TO_INT_MAP = {'ru': 0,'de':1,'he':2, 'es':3}
 LANGUAGE_STR_MAP = {Language.RUSSIAN: "ru", Language.GERMAN: "de", Language.HEBREW: "he", Language.SPANISH: "es"}
-LANGUAGE_OPPOSITE_STR_MAP = {"ru": Language.RUSSIAN, "de": Language.GERMAN, "he": Language.HEBREW,
-                             "es": Language.SPANISH}
-
-locations_map = {"DEBIAS_ENCODER": "_A", "BEGINNING_DECODER_DEBIAS": "_B", "END_DECODER_DEBIAS": "_C"}
-
-
+LANGUAGE_OPPOSITE_STR_MAP = {"ru": Language.RUSSIAN , "de": Language.GERMAN, "he":Language.HEBREW, "es":Language.SPANISH}
+LANGUAGE_CODES_MAP = {"en":"en_XX", "es":"es_XX","he":"he_IL","de":"de_DE","ru":"ru_RU"}
+locations_map={"DEBIAS_ENCODER":"_A","BEGINNING_DECODER_DEBIAS":"_B","END_DECODER_DEBIAS":"_C"}
 class DebiasMethod(Enum):
     HARD_DEBIAS = 0
     INLP = 1
-
-
+    LEACE = 2
 class WordsToDebias(Enum):
     ALL_VOCAB = 0
     ONE_TOKEN_PROFESSIONS = 1
     ALL_PROFESSIONS = 2
-
 
 EMBEDDING_SIZE = 256
 
