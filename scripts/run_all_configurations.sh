@@ -56,7 +56,7 @@ do
 Mandatory arguments:
   -m, --model                     the translation model. 0=Nematus, 1=EasyNMT .
 Optional arguments:
-  -c, --collect_embedding_table   collect embedding table .
+  -c, --collect_embedding_table   collect embedding table (relevant only for Nematus).
   -p, --preprocess                preprocess the anti dataset .
   -t, --translate                 translate the entire dataset .
   -a, --debias_encoder            debias the encoder .

@@ -71,7 +71,7 @@ Mandatory arguments:
   -d, --debias_method             the debias method. HARD_DEBIAS = 0, INLP = 1 .
   -m, --model                     the translation model. Nematus=0, EasyNMT=1, Mbart50=2 .
 Optional arguments:
-  -c, --collect_embedding_table   collect embedding table .
+  -c, --collect_embedding_table   collect embedding table (relevant only for Nematus).
   -p, --preprocess                preprocess the anti dataset .
   -t, --translate                 translate the entire dataset .
   -a, --debias_encoder            debias the encoder .
